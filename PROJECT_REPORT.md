@@ -4,8 +4,8 @@
 - **Course**: Bachelor of Computer Applications (BCA)
 - **Subject**: Web Application Development & Python Programming
 - **Student Name**: Mehak
-- **Registration / Roll No.**: Mehak1384
-- **Academic Year**: 2025–2026
+- **Registration / Roll No.**: 2210997138
+- **Academic Year**: 2022–2025
 
 ---
 
