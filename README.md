@@ -10,7 +10,7 @@
 
 ---
 
-## 📖 Abstract
+## Abstract
 
 In software development and recruiting, GitHub profile links are standard representations of a developer's portfolio. However, mistyped usernames or deleted accounts frequently lead to broken navigation and 404 dead ends.
 
@@ -18,7 +18,7 @@ In software development and recruiting, GitHub profile links are standard repres
 
 ---
 
-## 🚀 Key Features
+##  Key Features
 
 - **Strict Input Validation**: Client and server-side validation against GitHub username rules (1–39 alphanumeric characters, isolated hyphens, trimmed whitespace).
 - **REST API Verification**: Direct verification using GitHub's official endpoint (`https://api.github.com/users/{username}`) rather than speculative URL loading.
@@ -29,7 +29,7 @@ In software development and recruiting, GitHub profile links are standard repres
 
 ---
 
-## 📂 Project Directory Structure
+##  Project Directory Structure
 
 ```text
 github-username-finder/
@@ -59,7 +59,7 @@ github-username-finder/
 
 ---
 
-## 🛠️ Installation & Local Setup
+##  Installation & Local Setup
 
 ### Prerequisites
 - Python 3.10 or higher
@@ -96,7 +96,7 @@ python app.py
 
 ---
 
-## 🧪 Running Automated Tests
+## Running Automated Tests
 
 Run the full automated test suite using `pytest`:
 
@@ -115,7 +115,7 @@ pytest tests/test_app.py -v
 
 ---
 
-## 🌐 API Reference
+##  API Reference
 
 ### Route 1: Home Page
 - **URL**: `/`
@@ -141,18 +141,6 @@ pytest tests/test_app.py -v
 
 ---
 
-## 🎓 Academic Viva Voce Key Questions & Answers
 
-1. **Why was Flask chosen over Django for this project?**
-   Flask is a lightweight micro-framework ideal for single-purpose utilities and API-centric web apps, avoiding the heavyweight ORM and database overhead of Django.
-
-2. **How does the application prevent unnecessary requests to GitHub?**
-   It implements a two-tier validation approach: client-side JavaScript regex validation checks for empty strings or invalid characters before submission; server-side regex validation double-checks before issuing HTTP calls with `requests`.
-
-3. **What happens when GitHub rate-limits requests?**
-   Unauthenticated requests to the GitHub API are limited to 60 per hour per IP. The application checks for HTTP 403 / 429 status codes and displays a polite rate-limit notification instead of crashing.
-
----
-
-## 📄 License
+##  License
 This project is open-source under the [MIT License](LICENSE).
