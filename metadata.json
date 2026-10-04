@@ -1,0 +1,6 @@
+{
+  "name": "GitHub Username Finder & Redirector",
+  "description": "A verified GitHub username validation and profile redirection web application with REST API integration, test suite, and complete Python Flask project files for BCA academic submission.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

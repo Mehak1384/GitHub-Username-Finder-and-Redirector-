@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}GitHub Username Finder & Redirector — Verify and Redirect{% endblock %}
+
+{% block content %}
+<div class="search-hero">
+    <div class="card search-card">
+        <h1 class="card-title">Find GitHub Profile</h1>
+        <p class="card-subtitle">Enter a GitHub username to verify profile existence and redirect automatically.</p>
+
+        <form action="/find" method="POST" id="finder-form" class="finder-form">
+            <div class="form-group">
+                <label for="username" class="input-label">Enter your GitHub ID or GitHub link</label>
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        class="text-input" 
+                        placeholder="Enter your GitHub ID or GitHub link" 
+                        autocomplete="off"
+                        autofocus
+                        required
+                    >
+                </div>
+                <div id="validation-error" class="validation-message" style="display: none;"></div>
+            </div>
+
+            <div class="form-options">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="auto_redirect" value="true" checked>
+                    <span>Automatically redirect when found</span>
+                </label>
+            </div>
+
+            <button type="submit" id="submit-btn" class="btn btn-primary btn-block">
+                <span class="btn-text">Find Profile</span>
+                <span class="btn-spinner" style="display: none;">Verifying...</span>
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

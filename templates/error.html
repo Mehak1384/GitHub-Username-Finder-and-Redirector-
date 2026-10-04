@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Profile Not Found — GitHub Username Finder{% endblock %}
+
+{% block content %}
+<div class="result-hero">
+    <div class="card result-card error-card">
+        <div class="status-header error-header">
+            <span class="status-symbol">✕</span>
+            <div class="status-text-group">
+                <h1 class="status-title">
+                    {% if error_type == 'VALIDATION' %}
+                        Invalid Username Format
+                    {% elif error_type == 'API_ERROR' %}
+                        Service Temporarily Unavailable
+                    {% else %}
+                        GitHub Profile Not Found
+                    {% endif %}
+                </h1>
+                <p class="status-subtitle">
+                    {{ error_message or "The GitHub username you entered could not be found." }}
+                </p>
+            </div>
+        </div>
+
+        {% if username %}
+        <div class="attempted-query-box">
+            <span class="attempted-label">Attempted username:</span>
+            <code class="attempted-value">{{ username }}</code>
+        </div>
+        {% endif %}
+
+        <div class="diagnostic-tips">
+            <h3 class="tips-title">Troubleshooting Tips:</h3>
+            <ul class="tips-list">
+                <li>Verify spelling and character casing (e.g. check for mistyped letters or extra spaces).</li>
+                <li>GitHub usernames contain only letters, numbers, and single hyphens.</li>
+                <li>Usernames cannot begin or end with a hyphen or contain consecutive hyphens.</li>
+                <li>The user account may have been renamed, deleted, or suspended.</li>
+            </ul>
+        </div>
+
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary">Try Again</a>
+            <a href="https://github.com/search?q={{ username }}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                Search on GitHub.com
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

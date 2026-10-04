@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Profile Found — GitHub Username Finder{% endblock %}
+
+{% block content %}
+<div class="result-hero">
+    <div class="card result-card success-card">
+        <div class="status-header success-header">
+            <span class="status-symbol">✓</span>
+            <div class="status-text-group">
+                <h1 class="status-title">GitHub Profile Found!</h1>
+                <p class="status-subtitle">Profile verified successfully via GitHub REST API.</p>
+            </div>
+        </div>
+
+        <div class="profile-preview">
+            {% if user.avatar_url %}
+            <img src="{{ user.avatar_url }}" alt="{{ user.login }}" class="profile-avatar" referrerpolicy="no-referrer">
+            {% endif %}
+            <div class="profile-details">
+                <h2 class="profile-name">{{ user.name or user.login }}</h2>
+                <span class="profile-login">@{{ user.login }}</span>
+                {% if user.bio %}
+                <p class="profile-bio">{{ user.bio }}</p>
+                {% endif %}
+                <div class="profile-meta">
+                    <span>Public Repos: <strong>{{ user.public_repos }}</strong></span>
+                    <span>·</span>
+                    <span>Followers: <strong>{{ user.followers }}</strong></span>
+                    <span>·</span>
+                    <span>Following: <strong>{{ user.following }}</strong></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="redirect-countdown-box">
+            <div class="countdown-text">
+                Redirecting to <code>{{ profile_url }}</code> in <span id="countdown-sec" class="countdown-num">3</span> seconds...
+            </div>
+            <div class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
+            <div class="redirect-actions">
+                <a href="{{ profile_url }}" id="redirect-now-link" class="btn btn-primary">Redirect Now</a>
+                <button type="button" id="cancel-redirect-btn" class="btn btn-secondary">Stay on Page</button>
+                <a href="/" class="btn btn-text-link">Search Another</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let seconds = 3;
+        const countdownEl = document.getElementById("countdown-sec");
+        const progressBar = document.getElementById("progress-bar");
+        const cancelBtn = document.getElementById("cancel-redirect-btn");
+        const targetUrl = "{{ profile_url }}";
+        let cancelled = false;
+
+        progressBar.style.transition = "width 3s linear";
+        setTimeout(() => {
+            if (!cancelled) progressBar.style.width = "100%";
+        }, 50);
+
+        const timer = setInterval(() => {
+            if (cancelled) return;
+            seconds -= 1;
+            if (countdownEl) countdownEl.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(timer);
+                window.location.href = targetUrl;
+            }
+        }, 1000);
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener("click", () => {
+                cancelled = true;
+                clearInterval(timer);
+                if (countdownEl) countdownEl.parentElement.textContent = "Automatic redirection paused.";
+                cancelBtn.style.display = "none";
+            });
+        }
+    });
+</script>
+{% endblock %}
